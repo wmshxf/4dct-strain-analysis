@@ -1,0 +1,370 @@
+# Contributing to 4D-CT Strain Analysis
+
+Thank you for your interest in contributing to the 4D-CT Strain Analysis project! We welcome contributions from the medical imaging and software development communities.
+
+## Table of Contents
+
+- [Code of Conduct](#code-of-conduct)
+- [Getting Started](#getting-started)
+- [Development Environment Setup](#development-environment-setup)
+- [How to Contribute](#how-to-contribute)
+- [Pull Request Process](#pull-request-process)
+- [Coding Standards](#coding-standards)
+- [Testing Guidelines](#testing-guidelines)
+- [Documentation](#documentation)
+- [Community](#community)
+
+## Code of Conduct
+
+This project and everyone participating in it is governed by our Code of Conduct. By participating, you are expected to uphold this code. Please report unacceptable behavior to [project-email@institution.edu].
+
+### Our Pledge
+
+We are committed to making participation in our project a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation.
+
+## Getting Started
+
+### Prerequisites
+
+- Python 3.8 or higher
+- Git
+- Basic understanding of medical imaging concepts
+- Familiarity with scientific Python libraries (NumPy, SciPy, etc.)
+
+### Fork and Clone
+
+1. Fork the repository on GitHub
+2. Clone your fork locally:
+   ```bash
+   git clone https://github.com/yourusername/4dct-strain-analysis.git
+   cd 4dct-strain-analysis
+   ```
+
+## Development Environment Setup
+
+### Local Development Setup
+
+1. **Create a virtual environment:**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+2. **Install development dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   pip install -r requirements-dev.txt
+   ```
+
+3. **Install pre-commit hooks:**
+   ```bash
+   pre-commit install
+   ```
+
+4. **Verify installation:**
+   ```bash
+   python -m pytest tests/
+   ```
+
+### Docker Development Environment
+
+```bash
+docker-compose up -d dev
+docker-compose exec dev bash
+```
+
+## How to Contribute
+
+### Types of Contributions
+
+We welcome several types of contributions:
+
+#### 🐛 Bug Reports
+- Use the bug report template
+- Include system information, Python version, and dependency versions
+- Provide minimal reproducible examples
+- Include relevant error messages and stack traces
+
+#### 💡 Feature Requests
+- Use the feature request template
+- Explain the motivation and use case
+- Provide implementation suggestions if possible
+- Consider backwards compatibility
+
+#### 📝 Documentation Improvements
+- Fix typos and improve clarity
+- Add examples and tutorials
+- Improve API documentation
+- Translate documentation (when applicable)
+
+#### 🔧 Code Contributions
+- Bug fixes
+- New features
+- Performance improvements
+- Code refactoring
+
+### Issue Lifecycle
+
+1. **Issue Creation**: User creates issue using appropriate template
+2. **Triage**: Maintainers label and prioritize
+3. **Assignment**: Issue assigned to contributor
+4. **Development**: Contributor works on solution
+5. **Review**: Pull request review process
+6. **Merge**: Approved changes merged to main branch
+
+## Pull Request Process
+
+### Before Submitting
+
+1. **Search existing issues and PRs** to avoid duplicates
+2. **Create an issue** for significant changes to discuss approach
+3. **Fork the repository** and create a feature branch
+4. **Make your changes** following our coding standards
+5. **Add tests** for new functionality
+6. **Update documentation** as needed
+
+### PR Submission Checklist
+
+- [ ] PR has descriptive title and clear description
+- [ ] Code follows project coding standards
+- [ ] All tests pass locally
+- [ ] New tests added for new functionality
+- [ ] Documentation updated (if applicable)
+- [ ] CHANGELOG.md updated (for significant changes)
+- [ ] PR is based on latest main branch
+
+### Branch Naming Convention
+
+- `feature/short-description` - for new features
+- `bugfix/issue-number-description` - for bug fixes
+- `docs/description` - for documentation changes
+- `refactor/description` - for code refactoring
+
+### Commit Message Format
+
+```
+type(scope): brief description
+
+Detailed explanation of changes (if needed)
+
+Fixes #issue-number
+```
+
+**Types**: feat, fix, docs, style, refactor, test, chore
+
+**Examples**:
+```
+feat(segmentation): add adaptive thresholding for lung segmentation
+
+fix(motion): resolve optical flow calculation error for edge cases
+
+docs(readme): update installation instructions for Windows users
+```
+
+## Coding Standards
+
+### Python Style Guide
+
+We follow [PEP 8](https://www.python.org/dev/peps/pep-0008/) with some modifications:
+
+- **Line length**: 88 characters (Black default)
+- **Import organization**: Use `isort` for import sorting
+- **Code formatting**: Use `black` for automatic formatting
+- **Linting**: Use `flake8` for code quality checks
+
+### Code Quality Tools
+
+```bash
+# Format code
+black src/ tests/
+
+# Sort imports
+isort src/ tests/
+
+# Lint code
+flake8 src/ tests/
+
+# Type checking (optional)
+mypy src/
+```
+
+### Code Review Criteria
+
+- **Functionality**: Code works as intended
+- **Readability**: Clear, well-documented code
+- **Performance**: Efficient algorithms and memory usage
+- **Security**: No security vulnerabilities
+- **Testing**: Adequate test coverage
+- **Documentation**: Updated docs and docstrings
+
+## Testing Guidelines
+
+### Test Structure
+
+```
+tests/
+├── unit/           # Unit tests for individual modules
+├── integration/    # Integration tests for workflows
+├── data/          # Test data files
+└── conftest.py    # Pytest configuration
+```
+
+### Writing Tests
+
+- Use `pytest` framework
+- Aim for 80%+ code coverage
+- Test both success and failure cases
+- Use descriptive test names
+- Mock external dependencies
+
+### Test Categories
+
+#### Unit Tests
+```python
+def test_lung_segmentation_threshold():
+    """Test lung segmentation with various threshold values."""
+    processor = LungSegmentationProcessor(threshold=-400)
+    # Test implementation
+```
+
+#### Integration Tests
+```python
+def test_complete_analysis_pipeline():
+    """Test end-to-end analysis pipeline."""
+    # Test full workflow
+```
+
+#### Performance Tests
+```python
+def test_analysis_performance():
+    """Ensure analysis completes within reasonable time."""
+    # Performance benchmarks
+```
+
+### Running Tests
+
+```bash
+# Run all tests
+pytest
+
+# Run with coverage
+pytest --cov=src/ --cov-report=html
+
+# Run specific test file
+pytest tests/unit/test_segmentation.py
+
+# Run tests matching pattern
+pytest -k "test_lung_segmentation"
+```
+
+## Documentation
+
+### Documentation Types
+
+1. **API Documentation**: Docstrings in source code
+2. **User Guide**: Usage examples and tutorials
+3. **Developer Guide**: Architecture and development setup
+4. **Changelog**: Record of changes between versions
+
+### Docstring Style
+
+We use Google-style docstrings:
+
+```python
+def calculate_strain_parameters(displacement_field, lung_mask):
+    """Calculate strain parameters from displacement field.
+    
+    Args:
+        displacement_field (np.ndarray): 3D displacement field with shape (z, y, x, 3)
+        lung_mask (np.ndarray): Binary lung mask with shape (z, y, x)
+    
+    Returns:
+        Dict[str, Any]: Dictionary containing strain parameters:
+            - PSmax: Maximum principal strain
+            - PSmean: Mean principal strain
+            - Speedmax: Maximum displacement speed
+    
+    Raises:
+        ValueError: If displacement_field and lung_mask have incompatible shapes
+    
+    Example:
+        >>> displacement = np.random.random((100, 100, 100, 3))
+        >>> mask = np.ones((100, 100, 100), dtype=bool)
+        >>> params = calculate_strain_parameters(displacement, mask)
+        >>> print(f"PSmax: {params['PSmax']:.6f}")
+    """
+```
+
+### Building Documentation
+
+```bash
+cd docs
+make html  # Build HTML documentation
+make clean # Clean build artifacts
+```
+
+## Community
+
+### Communication Channels
+
+- **GitHub Issues**: Bug reports and feature requests
+- **GitHub Discussions**: General questions and community discussions
+- **Email**: [project-email@institution.edu] for sensitive matters
+
+### Getting Help
+
+1. **Check documentation** and existing issues first
+2. **Search GitHub Discussions** for similar questions
+3. **Create a new issue** with detailed information
+4. **Join community discussions** to connect with other users
+
+### Recognition
+
+Contributors are recognized in:
+- CONTRIBUTORS.md file
+- Release notes for significant contributions
+- GitHub contributor statistics
+
+## Release Process
+
+### Version Numbering
+
+We use [Semantic Versioning](https://semver.org/):
+- `MAJOR.MINOR.PATCH`
+- Major: Breaking changes
+- Minor: New features (backwards compatible)
+- Patch: Bug fixes (backwards compatible)
+
+### Release Checklist
+
+1. Update version numbers
+2. Update CHANGELOG.md
+3. Create release branch
+4. Run full test suite
+5. Build and test package
+6. Create GitHub release
+7. Publish to PyPI
+
+## Security
+
+### Reporting Security Issues
+
+Please email [security@institution.edu] for security-related issues. Do not create public GitHub issues for security vulnerabilities.
+
+### Security Best Practices
+
+- Keep dependencies updated
+- Follow secure coding practices
+- Validate all inputs
+- Use parameterized queries for any database interactions
+- Avoid hardcoded secrets
+
+## Questions?
+
+Don't hesitate to ask questions! We're here to help:
+
+- Create a GitHub issue with the "question" label
+- Start a discussion in GitHub Discussions
+- Email us at [project-email@institution.edu]
+
+Thank you for contributing to 4D-CT Strain Analysis! 🎉
